@@ -18,7 +18,7 @@
 				shared: true,
 				onOpen: function(res) {
 					var transport = res.transport;
-					$("#transport").text(transport).addClass(transport === "session" ? "" : "physical");
+					$("#transport").text(transport).addClass(transport === "local" ? "" : "physical");
 					$("#message").text(0);
 				},
 				onMessage: function(response) {
