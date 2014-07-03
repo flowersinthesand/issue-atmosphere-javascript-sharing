@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Atmosphere Chat</title>
-    <!-- Atmosphere -->
-    <!-- from https://github.com/Atmosphere/atmosphere-javascript/commit/a1a21b56a0eeb05542c47f760686f26a90fe0c22 -->
-    <script type="text/javascript" src="javascript/atmosphere.js"></script>
-    <!-- Application -->
-    <script type="text/javascript" src="javascript/jquery-1.9.0.js"></script>
-    <script type="text/javascript" src="javascript/application.js"></script>
-    <style>
-    * {font-family: tahoma; font-size: 12px; padding: 0px; margin: 0px;}
-    p {line-height: 18px;}
-    div {width: 500px; margin-left: auto; margin-right: auto;}
-    #content {padding: 5px; background: #ddd; border-radius: 5px; border: 1px solid #CCC; margin-top: 10px;}
-    #header {padding: 5px; background: #f5deb3; border-radius: 5px; border: 1px solid #CCC; margin-top: 10px;}
-    #input {border-radius: 2px; border: 1px solid #ccc; margin-top: 10px; padding: 5px; width: 400px;}
-    #status {width: 88px; display: block; float: left; margin-top: 15px;}
-    </style>
-</head>
-<body>
-    <div id="header"><h3>Atmosphere Chat. Default transport is WebSocket, fallback is long-polling</h3></div>
-    <div id="content"></div>
-    <div>
-        <span id="status">Connecting...</span>
-        <input type="text" id="input" disabled="disabled"/>
-    </div>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Sharing test</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script type="text/javascript">
+		$(function() {
+			$("#form").submit(function() {
+				var li = $("<li />").appendTo("#iframes"),
+					iframe = $("<iframe src='" + $(this).find("input[name=src]:checked").val() + "'/>").appendTo(li),
+					close = $("<button />").addClass("button").text("Close").appendTo(li).click(function() {
+						li.remove();
+					});
+			});
+		});
+		</script>
+		<style type="text/css">
+		form {border: 1px solid #DDDDDD; padding: 20px;}
+		form fieldset {margin: 0; padding: 0; border: 0;}
+		form fieldset legend {width: 100%; display: block; font-size: 21px; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; line-height: 40px; margin-bottom: 20px; border-color: #E5E5E5; border-style: none none solid; border-width: 0 0 1px;}
+		form fieldset label {display: block;}
+		form fieldset label * {vertical-align: middle;}
+		form fieldset code {background-color: #F8F8F8; border: 1px solid #DDDDDD; margin: 0 2px; padding: 0 5px; font-size: 12px; font-family: Consolas,​Courier,​monospace;}
+		ul {list-style: none; margin: 0; padding: 0;}
+		ul li {display: inline-block; margin: 10px; padding: 10px;}
+		iframe {border: none; width: 200px; height: 35px; vertical-align: middle;}
+		.button {margin: 0; background-color: #F5F5F5; background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6); border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3; border-image: none; border-style: solid; border-width: 1px; color: #333333; cursor: pointer; display: inline-block; font-size: 14px; line-height: 18px; padding: 4px 8px; text-align: center; vertical-align: top;}
+		.add {margin-top: 20px;}
+		</style>
+	</head>
+	<body>
+		<form id="form" action="#" onsubmit="return false;">
+			<fieldset>
+				<legend>Add iframe</legend>
+				<label class="radio">
+					<input type="radio" name="src" value="sharing-inner.html" checked>
+					<code>sharing-inner.html</code>
+				</label>
+				<label class="radio">
+					<input type="radio" name="src" value="path/sharing-inner.html">
+					<code>path/sharing-inner.html</code>
+				</label>
+				<button class="button add" type="submit">Add</button>
+			</fieldset>
+		</form>
+		<ul id="iframes">
+		</ul>
+	</body>
 </html>
